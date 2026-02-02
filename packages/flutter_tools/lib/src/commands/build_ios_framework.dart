@@ -320,9 +320,7 @@ class BuildIOSFrameworkCommand extends BuildFrameworkCommand {
 
       // Copy the native assets. The native assets have already been signed in
       // buildNativeAssetsMacOS.
-      final Directory nativeAssetsDirectory = globals.fs
-          .directory(getBuildDirectory())
-          .childDirectory('native_assets/ios/');
+      final Directory nativeAssetsDirectory = iPhoneBuildOutput.childDirectory('native_assets');
       if (await nativeAssetsDirectory.exists()) {
         final ProcessResult rsyncResult = await globals.processManager.run(<Object>[
           'rsync',
@@ -333,7 +331,7 @@ class BuildIOSFrameworkCommand extends BuildFrameworkCommand {
           '- native_assets.yaml',
           '--filter',
           '- native_assets.json',
-          nativeAssetsDirectory.path,
+          '${nativeAssetsDirectory.path}${globals.fs.path.separator}',
           modeDirectory.path,
         ]);
         if (rsyncResult.exitCode != 0) {
