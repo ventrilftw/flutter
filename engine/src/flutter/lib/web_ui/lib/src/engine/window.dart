@@ -376,8 +376,8 @@ final class _EngineFlutterViewImpl extends EngineFlutterView {
   _EngineFlutterViewImpl(
     EnginePlatformDispatcher platformDispatcher,
     DomElement hostElement, {
-    JsViewConstraints? viewConstraints,
-  }) : super._(_nextViewId++, platformDispatcher, hostElement, viewConstraints: viewConstraints);
+    super.viewConstraints,
+  }) : super._(_nextViewId++, platformDispatcher, hostElement);
 }
 
 /// The Web implementation of [ui.SingletonFlutterWindow].
